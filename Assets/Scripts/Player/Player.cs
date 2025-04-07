@@ -27,22 +27,31 @@ public class Player : MonoBehaviour
     //public Rigidbody2D rb2d;
     [SerializeField] private Rigidbody rb;
     [SerializeField] private Vector2 move;
-
     [SerializeField] private InputManager inputManager;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    [Header("Player Information")]
+    [SerializeField] public int PlayerNumber => playerNumber;
+    private int playerNumber;
+
+    //set player number
+    private void setPlayer(int n)
+    {
+        playerNumber = n;
+    }
     void Start()
     {
         inputManager = this.gameObject.GetComponent<InputManager>();
     }
 
-    // Update is called once per frame
+
     void Update()
     {
         horizontalInput = inputManager.movementVector.x;
         verticalInput = inputManager.movementVector.y;
         cooldownRemaining -= Time.deltaTime;
     }
+
+    //check if player is on ground for jump
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("Ground")) // Check if player is on the ground
@@ -58,19 +67,21 @@ public class Player : MonoBehaviour
             isGrounded = false;
         }
     }
+    //calls movement in fixed update
     public void FixedUpdate()
     {
         Move();
     }
-
     public void Move()
     {
         Vector3 movement = new Vector3 (horizontalInput,0, verticalInput);
-        rb.AddForce(movement*speed,ForceMode.VelocityChange);
+        rb.linearVelocity = movement * speed;
         Vector3 friction = new Vector3(-rb.linearVelocity.x, -2f, -rb.linearVelocity.z);
         rb.AddForce(friction * speed * 0.1f);
 
     }
+
+    //jump when not on ground
     public void Jump()
     {
         if (isGrounded)
@@ -78,6 +89,7 @@ public class Player : MonoBehaviour
             rb.AddForce(Vector3.up * jumpValue, ForceMode.Impulse);
         }
     }
+    //push ability
     public void Push()
     {
         if (cooldownRemaining <= 0) {
