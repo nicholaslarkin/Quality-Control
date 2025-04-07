@@ -2,15 +2,13 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 public class InputManager : MonoBehaviour
 {
-    
-    
+
     public Vector2 movementVector = Vector2.zero;
-    
 
     public void OnMove(InputAction.CallbackContext callbackContext)
     {
         movementVector = callbackContext.ReadValue<Vector2>();
-        
+
     }
 
     public void OnJump(InputAction.CallbackContext callbackContext)
@@ -29,5 +27,10 @@ public class InputManager : MonoBehaviour
             Debug.Log("Action!");
         }
     }
-    
+
+    public void OnPlayerJoin(InputAction.CallbackContext callbackcontext)
+    {
+     
+    }
+
 }
