@@ -180,7 +180,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3fc5a2b3167fdb14ab0ed3bee22091e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objects: []
+  objects:
+  - {fileID: 836124261}
+  - {fileID: 1871950127}
+  - {fileID: 905199778}
+  - {fileID: 1496333658}
+  - {fileID: 1041763046}
+  - {fileID: 225033821}
+  - {fileID: 1848176915}
+  - {fileID: 180448522}
 --- !u!1 &169563173
 GameObject:
   m_ObjectHideFlags: 0
@@ -2087,6 +2095,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerInputManager: {fileID: 1770601448}
+  playerPrefab1: {fileID: 2176318698509344504, guid: 9644f45fd922e9640be6d6a9a1845e01, type: 3}
+  playerPrefab2: {fileID: 2176318698509344504, guid: 9644f45fd922e9640be6d6a9a1845e01, type: 3}
+  playerPrefab3: {fileID: 2176318698509344504, guid: 9644f45fd922e9640be6d6a9a1845e01, type: 3}
+  playerPrefab4: {fileID: 2176318698509344504, guid: 9644f45fd922e9640be6d6a9a1845e01, type: 3}
 --- !u!114 &1770601450
 MonoBehaviour:
   m_ObjectHideFlags: 0
