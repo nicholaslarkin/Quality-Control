@@ -9,14 +9,14 @@ public class KOTHCircle : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             
-            other.gameObject.GetComponent<KOTHTimer>().countingDown = true;
+            other.gameObject.GetComponent<KOTHTimer>().countingDown = false;
         }
     }
     public void OnTriggerExit(Collider other)
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            other.gameObject.GetComponent<KOTHTimer>().countingDown = false;
+            other.gameObject.GetComponent<KOTHTimer>().countingDown = true;
         }
     }
 }

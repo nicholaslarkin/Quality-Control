@@ -7,6 +7,8 @@ public class KOTHTimer : MonoBehaviour
     [SerializeField] private float timer;
     [SerializeField] public bool countingDown = false; //bool var true if they are outside of the circle,gotten from koth script
 
+    public float TimeRemaining => timeRemaining;
+
     void Update()
     {
         if (timeRemaining <= 0)
