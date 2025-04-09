@@ -68,7 +68,7 @@
                 {
                     "name": "",
                     "id": "8e66fdf5-a2f8-4bd5-84da-812d73a0d1ec",
-                    "path": "<Mouse>/leftButton",
+                    "path": "<Keyboard>/e",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -266,7 +266,7 @@
                 {
                     "name": "",
                     "id": "7d704a29-2e22-4e2c-98a7-da5b2e30cce2",
-                    "path": "<Gamepad>/select",
+                    "path": "<Gamepad>/rightTrigger",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
