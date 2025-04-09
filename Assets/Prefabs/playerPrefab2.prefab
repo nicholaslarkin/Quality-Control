@@ -18,7 +18,7 @@ GameObject:
   - component: {fileID: 3991970813210208918}
   - component: {fileID: 4175802383908943368}
   m_Layer: 0
-  m_Name: playerPrefab
+  m_Name: playerPrefab2
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -33,7 +33,7 @@ Transform:
   m_GameObject: {fileID: 2039419099915127799}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.33673415, z: -0, w: 0.9415998}
-  m_LocalPosition: {x: 62.17, y: 10.2, z: 24.92}
+  m_LocalPosition: {x: 69.95, y: 10, z: 25.63}
   m_LocalScale: {x: 1.3418, y: 1.3418, z: 1.3418}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -131,18 +131,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c472434865b3a3c4d931e9190ba78f80, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
-  acceleration: 0
-  deceleration: 0
-  maxAcceleration: 0
+  speed: 100
   horizontalInput: 0
   verticalInput: 0
+  turnSpeed: 10
+  forceDirection: {x: 0.70710677, y: 0, z: 0.70710677}
   isGrounded: 0
-  jumpValue: 7
-  knockValue: 5
-  knockRange: 2
+  jumpValue: 10
+  knockbackValue: 10
+  knockupVector: {x: 0, y: 1, z: 0}
+  boxSize: {x: 2, y: 2, z: 2}
+  boxDistance: 2
   pushCooldown: 1
   cooldownRemaining: 1
+  boxCenter: {x: 0, y: 0, z: 0}
   rb: {fileID: 788522767949800631}
   move: {x: 0, y: 0}
   inputManager: {fileID: 6875328896846714226}
