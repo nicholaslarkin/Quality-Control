@@ -180,7 +180,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3fc5a2b3167fdb14ab0ed3bee22091e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objects: []
+  objects:
+  - {fileID: 836124261}
+  - {fileID: 1871950127}
+  - {fileID: 905199778}
+  - {fileID: 1496333658}
+  - {fileID: 1041763046}
+  - {fileID: 225033821}
+  - {fileID: 1848176915}
+  - {fileID: 180448522}
 --- !u!1 &169563173
 GameObject:
   m_ObjectHideFlags: 0
@@ -2440,6 +2448,7 @@ MonoBehaviour:
   - {fileID: 2039419099915127799, guid: 68a611844fadb734188356467b1921b1, type: 3}
   - {fileID: 2039419099915127799, guid: 8f453116b05b8b245aeaaa1e6e62bfce, type: 3}
   playerPrefab: {fileID: 0}
+
 --- !u!114 &1770601450
 MonoBehaviour:
   m_ObjectHideFlags: 0
