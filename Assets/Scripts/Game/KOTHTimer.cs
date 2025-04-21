@@ -33,8 +33,7 @@ public class KOTHTimer : MonoBehaviour
     }
     public void timerFinish()
     {
-        Debug.Log("Player timer over");
-        Destroy(gameObject);
+        GetComponent<Transform>().position = DeathTrigger.deathPos;
     }
 
     public void timerPaused()

@@ -5,9 +5,12 @@ using UnityEngine.InputSystem;
 
 public class PlayerManager : MonoBehaviour
 {
+    public static PlayerManager Instance => instance;
+    private static PlayerManager instance;
     public PlayerInputManager playerInputManager;
 
-    private List<Player> playerList = new List<Player>();
+    public static List<GameObject> playerList = new List<GameObject>();
+    public static List<bool> playerStatus = new List<bool>();  
     [SerializeField] private List<GameObject> playerPrefabs = new List<GameObject>();
     [SerializeField] private GameObject playerPrefab;
     //[SerializeField] private GameObject player1Spawn;
@@ -17,15 +20,16 @@ public class PlayerManager : MonoBehaviour
 
     private void Awake()
     {
-        
+        instance = this;
     }
 
     private void Start()
     {
+        DontDestroyOnLoad(this);
         playerTotal();
     }
 
-    //eventually rework the multiplayer system to use manual join and the JoinPlayer() method of the playerinputmanager. this will just pair devi
+    //eventually rework the multiplayer system to use manual join and the JoinPlayer() method of the playerinputmanager. this will just pair device
     void Update()
     {
         playerPrefab = PlayerInputManager.instance.playerPrefab = playerPrefabs[playerInputManager.playerCount];
@@ -47,6 +51,7 @@ public class PlayerManager : MonoBehaviour
                         PlayerInputManager.instance.playerPrefab = playerPrefab;
                         //Instantiate(playerPrefab1, player1Spawn.transform.position, Quaternion.identity);
                         playerTotal();
+                        
                         break;
                     case (2):
                         PlayerInputManager.instance.playerPrefab = playerPrefab;

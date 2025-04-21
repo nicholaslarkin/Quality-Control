@@ -559,7 +559,6 @@ MonoBehaviour:
   speed: 100
   horizontalInput: 0
   verticalInput: 0
-  turnSpeed: 10
   forceDirection: {x: 0.70710677, y: 0, z: 0.70710677}
   isGrounded: 0
   jumpValue: 10
@@ -573,6 +572,8 @@ MonoBehaviour:
   rb: {fileID: 6263683476355791344}
   move: {x: 0, y: 0}
   inputManager: {fileID: 677918224886546412}
+  playerNumber: 0
+  playerAlive: 1
 --- !u!114 &677918224886546412
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -701,6 +702,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b52b55ca286148145a5008c1413736b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeRemaining: 30
+  timeRemaining: 10
   timer: 0
   countingDown: 1
