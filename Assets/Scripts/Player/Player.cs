@@ -1,14 +1,17 @@
 using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
+
+    [SerializeField] public int winningScore = 5;
     [Header("Movement")]
     [SerializeField] private float speed = 100;
     [SerializeField] private float horizontalInput;
     [SerializeField] private float verticalInput;
-    [SerializeField] private float turnSpeed = 10f;
+    //[SerializeField] private float turnSpeed = 10f;
     [SerializeField] private Vector3 forceDirection = new Vector3(1f, 0f, 1f).normalized;
 
     [Header("Jump")]
@@ -34,16 +37,32 @@ public class Player : MonoBehaviour
 
     [Header("Player Information")]
     [SerializeField] public int PlayerNumber => playerNumber;
-    private int playerNumber;
+    [SerializeField] private int playerNumber;
+    [SerializeField] public bool playerAlive = true;
+    [SerializeField] public int gameScore = 0;
+
+  
+    
 
     //set player number
-    private void setPlayer(int n)
+
+    
+    private void setPlayer()
     {
-        playerNumber = n;
+        playerNumber = PlayerManager.playerList.IndexOf(this.gameObject);
+    }
+
+    private void Awake()
+    {
     }
     void Start()
     {
+
         inputManager = this.gameObject.GetComponent<InputManager>();
+        PlayerManager.playerList.Add(this.gameObject);
+        setPlayer();
+        SceneManager.MoveGameObjectToScene(gameObject, SceneManager.GetSceneByName("PlayerScene"));
+
     }
 
 
@@ -53,6 +72,11 @@ public class Player : MonoBehaviour
         horizontalInput = inputManager.movementVector.x;
         verticalInput = inputManager.movementVector.y;
         cooldownRemaining -= Time.deltaTime;
+
+        if (gameScore == winningScore )
+        {
+
+        }
     }
 
     //check if player is on ground for jump
@@ -74,8 +98,10 @@ public class Player : MonoBehaviour
     //calls movement in fixed update
     public void FixedUpdate()
     {
-        Move();
-        
+        if (playerAlive)
+        {
+            Move();
+        }
     }
     public void Move()
     {
@@ -99,7 +125,7 @@ public class Player : MonoBehaviour
     //jump when not on ground
     public void Jump()
     {
-        if (isGrounded)
+        if (isGrounded && playerAlive)
         {
             rb.AddForce(Vector3.up * jumpValue, ForceMode.Impulse);
         }
@@ -108,7 +134,7 @@ public class Player : MonoBehaviour
     public void Push()
     {
         Debug.Log("pushed");
-        if (cooldownRemaining <= 0) {
+        if (cooldownRemaining <= 0 && playerAlive) {
             cooldownRemaining -= Time.deltaTime;
             Collider[] hits = Physics.OverlapBox(boxCenter, boxSize/2 ,transform.rotation);
 
