@@ -6,11 +6,23 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/title screen.unity
+    path: Assets/Scenes/BuildScenes/MainMenu.unity
     guid: 13e07dde5cbd18247aa42ff3b5076a70
   - enabled: 1
-    path: Assets/Scenes/KothScene.unity
+    path: Assets/Scenes/BuildScenes/KothScene.unity
     guid: 3cea1cd4b3397da40b0b52714661d241
+  - enabled: 1
+    path: Assets/Scenes/BuildScenes/BoxScene.unity
+    guid: f357451e6fabad04795be345db5c3868
+  - enabled: 1
+    path: Assets/Scenes/BuildScenes/ElectricScene.unity
+    guid: eb69c0d530f5fac4cafe4520fe5e4f92
+  - enabled: 1
+    path: Assets/Scenes/BuildScenes/PlayerScene.unity
+    guid: e51d3c6b1227a3c43aad30340a850994
+  - enabled: 1
+    path: Assets/Scenes/BuildScenes/EndGame.unity
+    guid: 87f52ddebb9aeb74c8789c6362e3927c
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 2ffa728918b676845b97b991418b2d42, type: 2}
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}

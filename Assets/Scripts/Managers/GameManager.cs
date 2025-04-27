@@ -10,7 +10,7 @@ public class GameManager : MonoBehaviour
     public enum GameStateEnums
     {
         MainMenu,
-        SelectPlayers,
+        PlayersJoin,
         InGame,
         RoundOver,
         GameOver,

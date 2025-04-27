@@ -556,6 +556,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c472434865b3a3c4d931e9190ba78f80, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  winningScore: 0
   speed: 100
   horizontalInput: 0
   verticalInput: 0
@@ -574,6 +575,7 @@ MonoBehaviour:
   inputManager: {fileID: 677918224886546412}
   playerNumber: 0
   playerAlive: 1
+  gameScore: 0
 --- !u!114 &677918224886546412
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -697,11 +699,11 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6253259833066860667}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b52b55ca286148145a5008c1413736b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeRemaining: 10
+  timeRemaining: 3
   timer: 0
   countingDown: 1
