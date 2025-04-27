@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class Player : MonoBehaviour
 {
 
-    [SerializeField] public int winningScore = 5;
+    [SerializeField] public int winningScore = 6;
     [Header("Movement")]
     [SerializeField] private float speed = 100;
     [SerializeField] private float horizontalInput;
@@ -163,6 +163,20 @@ public class Player : MonoBehaviour
     {
         Vector3 boxCenter = transform.position + transform.forward * boxDistance;
         DebugDrawBox(boxCenter, boxSize, transform.rotation, Color.green);
+    }
+
+
+    //transform player + endable/disasble scripts based on open scene
+
+
+    public void transformBasedOnScene()
+    {
+
+    }
+
+    public void enableComponentsBasedOnScene()
+    {
+
     }
 
 }
