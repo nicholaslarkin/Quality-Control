@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Android;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
 public class SceneTransition : MonoBehaviour
@@ -12,9 +13,9 @@ public class SceneTransition : MonoBehaviour
     Box = 2
     Electric = 3
     */
-
-
-
+    public static SceneTransition Instance => instance;
+    private static SceneTransition instance;
+    
 
     public Camera playerSceneCamera;
     public int sceneIndex;
@@ -30,8 +31,15 @@ public class SceneTransition : MonoBehaviour
 
     // List<Scene> minigameNext => minigameScenes;
 
+    private void Awake()
+    {
+        instance = this;
+        DontDestroyOnLoad(this);
+
+    }
     private void Start()
-    {   
+    {
+        
         //GoToScene();
         MainMenu = SceneManager.GetSceneByPath(SceneUtility.GetScenePathByBuildIndex(0));
         playerJoinScene = SceneManager.GetSceneByPath(SceneUtility.GetScenePathByBuildIndex(4));
@@ -40,11 +48,7 @@ public class SceneTransition : MonoBehaviour
         electricScene = SceneManager.GetSceneByPath(SceneUtility.GetScenePathByBuildIndex(3));
         Debug.Log("Refreshed on start");
         refreshSceneCount();
-
-
-}
-
-
+    }
     private void refreshSceneCount()
     {
         minigameScenes.Clear();
@@ -53,7 +57,6 @@ public class SceneTransition : MonoBehaviour
         minigameScenes.Add(electricScene);
     }
 
-   
     //private void StartGame()
     //{
     //    SceneManager.LoadScene(playerJoinScene.buildIndex);
@@ -73,7 +76,6 @@ public class SceneTransition : MonoBehaviour
             Debug.Log("Nextsceneindex: " + nextSceneIndex);
         }
 
-        
     }
 
     public void goNextScene()
@@ -117,7 +119,7 @@ public class SceneTransition : MonoBehaviour
         Debug.Log("minigameScenes count" + minigameScenes.Count);
         Debug.Log("NextSceneIndex: " + nextSceneIndex);
         Debug.Log("SceneIndex: " + sceneIndex);
-        SceneManager.LoadSceneAsync(1, LoadSceneMode.Additive); //add a minigamescene from list
+        SceneManager.LoadSceneAsync(2, LoadSceneMode.Additive); //add a minigamescene from list
         //minigameScenes.RemoveAt(sceneIndex); //remove that scene from the list
 
     }

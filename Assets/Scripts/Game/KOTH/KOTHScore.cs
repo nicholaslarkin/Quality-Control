@@ -9,7 +9,7 @@ public class KOTHScore : MonoBehaviour
 {
 
     //private Dictionary<GameObject, int> scores = new Dictionary<GameObject, int>();
-    [SerializeField] private int index;
+    //[SerializeField] private int index;
     [SerializeField] private List<GameObject> playerSpawnsKOTH = new List<GameObject>();
     //[SerializeField] private PlayerManager playerManager = GameObject.FindGameObjectWithTag("PlayerManager");
     private void setScore()

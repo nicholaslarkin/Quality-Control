@@ -12,7 +12,6 @@ public class GameManager : MonoBehaviour
         MainMenu,
         PlayersJoin,
         InGame,
-        RoundOver,
         GameOver,
     }
 
