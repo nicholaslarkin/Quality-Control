@@ -4003,12 +4003,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 988feb192e9d21446ba6232bd1673919, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerSceneCamera: {fileID: 0}
   sceneIndex: 0
+  nextSceneIndex: 0
   playerscreenCountdown: 0
   minigameScenes:
   - m_Handle: 0
   - m_Handle: 0
   - m_Handle: 0
+  sceneSelected: 
 --- !u!4 &2029063549
 Transform:
   m_ObjectHideFlags: 0

@@ -113,8 +113,11 @@ public class Player : MonoBehaviour
         //rotate the player towards the velocity
         if (rb.linearVelocity.sqrMagnitude > 0.01f)
         {
-            Quaternion targetRotation = Quaternion.LookRotation(rb.linearVelocity.normalized);
-            rb.MoveRotation(Quaternion.Euler(0f, targetRotation.eulerAngles.y, 0f));
+            Vector3 vel = Vector3.Lerp(movement, rb.linearVelocity.normalized, 0.25f);
+            vel.y = 0;
+            Quaternion targetRotation = Quaternion.LookRotation(vel);
+            //rb.MoveRotation(Quaternion.Euler(0f, targetRotation.eulerAngles.y, 0f));
+            rb.rotation = Quaternion.Lerp(rb.rotation, targetRotation, 0.5f);
         }
         
         rb.AddForce(friction * speed * 0.1f);
