@@ -16,17 +16,17 @@ public class DeathTrigger : MonoBehaviour
     [SerializeField] public static List<int> playerDeathOrder = new List<int>(4);
 
 
-    //public void OnTriggerEnter(Collider other)
-    //{
-    //    if (other.gameObject.CompareTag("Player"))
-    //    {
-    //        //playerDeathOrder.Add(PlayerManager.playerList.FindIndex(go => go == other.gameObject));
-    //        Debug.Log("DeathOrderList: " + DeathTrigger.playerDeathOrder);
-    //        other.gameObject.GetComponent<Player>().playerAlive = false;
-    //        other.gameObject.GetComponent<Transform>().position = deathPos;
-    //    }
+    public void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Player"))
+        {
+            //playerDeathOrder.Add(PlayerManager.playerList.FindIndex(go => go == other.gameObject));
+            Debug.Log("DeathOrderList: " + DeathTrigger.playerDeathOrder);
+            other.gameObject.GetComponent<Player>().playerAlive = false;
+            other.gameObject.GetComponent<Transform>().position = deathPos;
+        }
 
-    //}
+    }
 
     public void Update()
     {
