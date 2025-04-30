@@ -203,7 +203,6 @@ MonoBehaviour:
   - {fileID: 6253259833066860667, guid: 37972dba80246514e8e3e60b3a6c870f, type: 3}
   - {fileID: 6253259833066860667, guid: 1f45130c3ac527043933871b90b49899, type: 3}
   playerPrefab: {fileID: 6253259833066860667, guid: dc0ddfaec716d274a97f7985c0cffd40, type: 3}
-  playerSpawnsKOTH: []
   playerSpawnsBOX: []
   playerSpawnsElectric: []
 --- !u!4 &1983291656
