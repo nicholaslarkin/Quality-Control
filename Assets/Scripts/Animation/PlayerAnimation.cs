@@ -1,46 +1,58 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class RobotDirectionController : MonoBehaviour
+public class PlayerAnimation : MonoBehaviour
 {
-    [Header("Robot Body")]
-    public Sprite[] bodySprites;  // 8 sprites for robot body
-    public Image robotBodyImage;  // Image for robot body
+    [Header("Direction Sprites")]
+    public Sprite[] bodySprites;           // 8 directional sprites for the robot body
+    public Image robotBodyImage;           // UI Image component for robot body
 
-    [Header("Robot Treads")]
-    public Sprite[] treadSprites; // 8 sprites for treads
-    public Image robotTreadImage; // Image for treads
+    public Sprite[] treadSprites;          // 8 directional sprites for the robot treads
+    public Image robotTreadImage;          // UI Image component for robot treads
 
-    private Vector3 lastPosition;
+    [Header("UI Tracking Settings")]
+    public Transform followTarget3D;       // Empty anchor point in the 3D world
+    public Camera mainCamera;              // Main gameplay camera
+    public RectTransform uiRoot;           // The RectTransform that holds the UI sprite group
+
+    private Vector3 lastWorldPosition;
 
     void Start()
     {
-        lastPosition = transform.position;
+        if (followTarget3D != null)
+        {
+            lastWorldPosition = followTarget3D.position;
+        }
     }
 
-    void Update()
+    void LateUpdate()
     {
-        Vector3 movement = transform.position - lastPosition;
-        lastPosition = transform.position;
+        UpdateDirectionSprites();
+        UpdateSpriteFollow();
+    }
 
-        Vector2 moveDirection = new Vector2(movement.x, movement.z);
+    void UpdateDirectionSprites()
+    {
+        if (followTarget3D == null)
+            return;
 
-        if (moveDirection.sqrMagnitude > 0.001f)
+        Vector3 movement = followTarget3D.position - lastWorldPosition;
+        lastWorldPosition = followTarget3D.position;
+
+        Vector2 moveDir = new Vector2(movement.x, movement.z);
+
+        if (moveDir.sqrMagnitude > 0.001f)
         {
-            float angle = Mathf.Atan2(moveDirection.y, moveDirection.x) * Mathf.Rad2Deg;
+            float angle = Mathf.Atan2(moveDir.y, moveDir.x) * Mathf.Rad2Deg;
             angle = (angle + 360f) % 360f;
 
             int index = GetDirectionIndex(angle);
 
             if (bodySprites != null && bodySprites.Length > index && robotBodyImage != null)
-            {
                 robotBodyImage.sprite = bodySprites[index];
-            }
 
             if (treadSprites != null && treadSprites.Length > index && robotTreadImage != null)
-            {
                 robotTreadImage.sprite = treadSprites[index];
-            }
         }
     }
 
@@ -63,6 +75,22 @@ public class RobotDirectionController : MonoBehaviour
         else if (angle >= 292.5f && angle < 337.5f)
             return 7; // Down-Right
 
-        return 0; // Default fallback
+        return 0;
+    }
+
+    void UpdateSpriteFollow()
+    {
+        if (followTarget3D == null || mainCamera == null || uiRoot == null)
+            return;
+
+        Vector3 screenPos = mainCamera.WorldToScreenPoint(followTarget3D.position);
+
+        Vector2 uiPos;
+        RectTransform canvasRect = uiRoot.root as RectTransform;
+
+        if (RectTransformUtility.ScreenPointToLocalPointInRectangle(canvasRect, screenPos, null, out uiPos))
+        {
+            uiRoot.anchoredPosition = uiPos;
+        }
     }
 }
