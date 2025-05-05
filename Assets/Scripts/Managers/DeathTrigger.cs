@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Linq;
 using NUnit.Framework;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 
 public class DeathTrigger : MonoBehaviour
 {
@@ -9,10 +10,6 @@ public class DeathTrigger : MonoBehaviour
     public static bool oneAlive = false;
     public int playerLiving = 5;
     [SerializeField] public SceneTransition sceneTransition;
-    [SerializeField] private GameObject player1Spawn;
-    [SerializeField] private GameObject player2Spawn;
-    [SerializeField] private GameObject player3Spawn;
-    [SerializeField] private GameObject player4Spawn;
     [SerializeField] public static List<int> playerDeathOrder = new List<int>(4);
 
 
@@ -30,37 +27,49 @@ public class DeathTrigger : MonoBehaviour
 
     public void Update()
     {
+        foreach (GameObject player in PlayerManager.playerList)
+        {
+
+        }
+
+        //if there is only 1 player alive and there are more than 1 players in the game, go next scene
         if (PlayerManager.playerStatus.Count(b => b) == 1 && PlayerManager.playerList.Count > 1)
         {
-            //SceneTransition.goNextScene();
-            GameObject.Find("PlayerSceneManager").GetComponent<SceneTransition>().goNextScene();
+            oneAlive = true;
+            foreach (GameObject player in PlayerManager.playerList)
+            {
+                //if the player is the one that is alive, give them a point
+                if (player.GetComponent<Player>().playerAlive == true)
+                {
+                    player.GetComponent<Player>().gameScore++;
+                    //checks if any player has 6 points
+                    ScoreCheck();
+                    resetStatus();
+                    //goes to next scene after point is given
+                    GameObject.Find("PlayerSceneManager").GetComponent<SceneTransition>().goNextScene();
+                }
+            }
         }
     }
-    //rework this to choose next minigame and load that scene
-    //public void resetKOTH()
-    //{
-    //    if (PlayerManager.playerList.Count > 1 && PlayerManager.playerStatus.Count(b => b) == 1)
-    //        {
-    //            oneAlive = true;
-    //            PlayerManager.playerList[0].GetComponent<Transform>().position = player1Spawn.transform.position;
-    //            PlayerManager.playerList[1].GetComponent<Transform>().position = player2Spawn.transform.position;
-    //            PlayerManager.playerList[2].GetComponent<Transform>().position = player3Spawn.transform.position;
-    //            PlayerManager.playerList[3].GetComponent<Transform>().position = player4Spawn.transform.position;
-    //            foreach (GameObject player in PlayerManager.playerList)
-    //            {
-    //                GetComponent<Player>().playerAlive = true;
-    //                GetComponent<KOTHTimer>().timerRestart();
-    //            Debug.Log("Restarted in if");   
-                    
-    //            }
-    //        }
-    //        else
-    //        {
-    //            PlayerManager.playerList[0].GetComponent<Player>().playerAlive = true;
-    //            PlayerManager.playerList[0].GetComponent<Transform>().position = player1Spawn.transform.position;
-    //            PlayerManager.playerList[0].GetComponent<KOTHTimer>().timerRestart();
-    //            Debug.Log("restarted in else");
-                
-    //        }
-    //}
+
+    
+    public void resetStatus() //change all players to alive again
+    {
+        foreach (GameObject player in PlayerManager.playerList)
+        {
+
+            player.GetComponent<Player>().playerAlive = true;
+        }
+    }
+    public void ScoreCheck()
+    {
+        foreach (GameObject player in PlayerManager.playerList)
+        {
+            if (player.GetComponent<Player>().gameScore == 6)
+            {
+                SceneManager.LoadScene(5);
+            }
+        }
+
+    }
 }

@@ -8,7 +8,7 @@ public class BeltMovement : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            other.GetComponent<Rigidbody>().AddForce(new Vector3(-1, 0, 0).normalized* beltPushForce, ForceMode.Force);
+            other.GetComponent<Rigidbody>().AddForce(new Vector3(-1, 0, -1).normalized* beltPushForce, ForceMode.Force);
             Debug.Log("BeltTriggered");
             other.gameObject.GetComponent<KOTHTimer>().enabled = false;
         }

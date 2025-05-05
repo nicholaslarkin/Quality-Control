@@ -13,13 +13,6 @@ public class PlayerManager : MonoBehaviour
     public static List<bool> playerStatus = new List<bool>();  
     [SerializeField] private List <GameObject> playerPrefabsKoth = new List<GameObject>();
     [SerializeField] private GameObject playerPrefab;
-    
-    [SerializeField] public List <GameObject> playerSpawnsBOX = new List<GameObject>();
-    [SerializeField] public List <GameObject> playerSpawnsElectric = new List<GameObject>();
-    //[SerializeField] private GameObject player1Spawn;
-    //[SerializeField] private GameObject player2Spawn;
-    //[SerializeField] private GameObject player3Spawn;
-    //[SerializeField] private GameObject player4Spawn;
 
     private void Awake()
     {
@@ -29,7 +22,6 @@ public class PlayerManager : MonoBehaviour
     private void Start()
     {
         DontDestroyOnLoad(this);
-        playerTotal();
     }
 
     //eventually rework the multiplayer system to use manual join and the JoinPlayer() method of the playerinputmanager. this will just pair device
@@ -37,83 +29,52 @@ public class PlayerManager : MonoBehaviour
     {
         playerPrefab = PlayerInputManager.instance.playerPrefab = playerPrefabsKoth[playerInputManager.playerCount];
         playerInputManager.DisableJoining();
+        //allow players to join only when gamestate is playerjoin
         switch (GameManager.Instance.GameState)
         {
             case (GameManager.GameStateEnums.PlayersJoin):
                 playerInputManager.EnableJoining();
                 //spawn player prefab based off player count in game
-                //switch (playerInputManager.playerCount)
-                //{
-                //    case (1):
-                //        PlayerInputManager.instance.playerPrefab = playerPrefab;
-                //        //Instantiate(playerPrefab1, player1Spawn.transform.position, Quaternion.identity);
-                //        playerTotal();
-
-                //        break;
-                //    case (2):
-                //        PlayerInputManager.instance.playerPrefab = playerPrefab;
-                //        //Instantiate(playerPrefab2, player2Spawn.transform.position, Quaternion.identity);
-                //        playerTotal();
-                //        break;
-                //    case (3):
-                //        PlayerInputManager.instance.playerPrefab = playerPrefab;
-                //        //Instantiate(playerPrefab3, player3Spawn.transform.position, Quaternion.identity);
-                //        playerTotal();
-                //        break;
-                //    case (4):
-                //        PlayerInputManager.instance.playerPrefab = playerPrefab;
-                //        //Instantiate(playerPrefab4, player4Spawn.transform.position, Quaternion.identity);
-                //        playerTotal();
-                //        break;
-                //    default:
-                //        break;
-
-                //}
-                break;
-            //case (GameManager.GameStateEnums.InGame):
-            //    playerInputManager.EnableJoining();
-            //    break;
-            case (GameManager.GameStateEnums.InGame):
-                playerInputManager.EnableJoining();
-                //playerInputManager.DisableJoining();
                 switch (playerInputManager.playerCount)
                 {
                     case (1):
                         PlayerInputManager.instance.playerPrefab = playerPrefab;
-                        //Instantiate(playerPrefab1, player1Spawn.transform.position, Quaternion.identity);
-                        playerTotal();
-
                         break;
                     case (2):
                         PlayerInputManager.instance.playerPrefab = playerPrefab;
-                        //Instantiate(playerPrefab2, player2Spawn.transform.position, Quaternion.identity);
-                        playerTotal();
                         break;
                     case (3):
                         PlayerInputManager.instance.playerPrefab = playerPrefab;
-                        //Instantiate(playerPrefab3, player3Spawn.transform.position, Quaternion.identity);
-                        playerTotal();
                         break;
                     case (4):
                         PlayerInputManager.instance.playerPrefab = playerPrefab;
-                        //Instantiate(playerPrefab4, player4Spawn.transform.position, Quaternion.identity);
-                        playerTotal();
                         break;
                     default:
                         break;
 
                 }
-
-
                 break;
-
-
+            case (GameManager.GameStateEnums.InGame):
+                playerInputManager.DisableJoining();
+                break;
+            case (GameManager.GameStateEnums.MainMenu):
+                playerInputManager.DisableJoining();
+                break;
+            case (GameManager.GameStateEnums.GameOver):
+                playerInputManager.DisableJoining();
+                break;
         }
+
+        foreach(GameObject player in playerList)
+        {
+            if (player.GetComponent<Player>().gameScore == 6)
+            {
+                GameManager.Instance.GameState = GameManager.GameStateEnums.GameOver;
+            }
+        }
+
     }
-    public void playerTotal()
-    {
-        //Debug.Log("total player number: " + playerInputManager.playerCount);
-    }
+
 
 
 

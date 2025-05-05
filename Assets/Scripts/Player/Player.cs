@@ -40,6 +40,7 @@ public class Player : MonoBehaviour
     [SerializeField] private int playerNumber;
     [SerializeField] public bool playerAlive = true;
     [SerializeField] public int gameScore = 0;
+    [SerializeField] public Boolean canMove = true;
 
   
     
@@ -57,9 +58,10 @@ public class Player : MonoBehaviour
     }
     void Start()
     {
-
         inputManager = this.gameObject.GetComponent<InputManager>();
+        //adds player to playerlist and status tracker
         PlayerManager.playerList.Add(this.gameObject);
+        PlayerManager.playerStatus.Add(true);
         setPlayer();
         SceneManager.MoveGameObjectToScene(gameObject, SceneManager.GetSceneByName("PlayerScene"));
 
@@ -98,7 +100,7 @@ public class Player : MonoBehaviour
     //calls movement in fixed update
     public void FixedUpdate()
     {
-        if (playerAlive)
+        if (playerAlive && canMove)
         {
             Move();
         }
@@ -107,7 +109,6 @@ public class Player : MonoBehaviour
     {
         Vector3 movement = new Vector3 (horizontalInput,0, verticalInput);
         rb.AddForce(movement* speed);
-        //rb.linearVelocity = movement * speed;
 
         Vector3 friction = new Vector3(-rb.linearVelocity.x, -2f, -rb.linearVelocity.z);
         //rotate the player towards the velocity
@@ -116,19 +117,16 @@ public class Player : MonoBehaviour
             Vector3 vel = Vector3.Lerp(movement, rb.linearVelocity.normalized, 0.25f);
             vel.y = 0;
             Quaternion targetRotation = Quaternion.LookRotation(vel);
-            //rb.MoveRotation(Quaternion.Euler(0f, targetRotation.eulerAngles.y, 0f));
             rb.rotation = Quaternion.Lerp(rb.rotation, targetRotation, 0.5f);
         }
         
         rb.AddForce(friction * speed * 0.1f);
-
-
     }
 
     //jump when not on ground
     public void Jump()
     {
-        if (isGrounded && playerAlive)
+        if (isGrounded && playerAlive && canMove)
         {
             rb.AddForce(Vector3.up * jumpValue, ForceMode.Impulse);
         }
