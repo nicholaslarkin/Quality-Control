@@ -16,18 +16,15 @@ public class BoxManager: MonoBehaviour
     private float timer; // Timer to track the time between instantiations
     private void Start()
     {
-        if (PlayerManager.playerList.Count >= 1) {
+        if (PlayerManager.playerList.Count >= 1) 
             PlayerManager.playerList[0].GetComponent<Transform>().position = playerSpawnsBOX[0].GetComponent<Transform>().position;
-            Debug.Log("Moved Player");
-
-        }
-
         if (PlayerManager.playerList.Count >= 2)
             PlayerManager.playerList[1].GetComponent<Transform>().position = playerSpawnsBOX[1].GetComponent<Transform>().position;
         if (PlayerManager.playerList.Count >= 3)
             PlayerManager.playerList[2].GetComponent<Transform>().position = playerSpawnsBOX[2].GetComponent<Transform>().position;
         if (PlayerManager.playerList.Count >= 4)
             PlayerManager.playerList[3].GetComponent<Transform>().position = playerSpawnsBOX[3].GetComponent<Transform>().position;
+
 
     }
     

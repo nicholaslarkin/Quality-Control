@@ -3,7 +3,6 @@ using UnityEngine;
 public class BoxMovement : MonoBehaviour
 {
     [SerializeField] private float speed;
-    [SerializeField] private float moveX;
     [SerializeField] private float moveZ;
     private void Start()
     {

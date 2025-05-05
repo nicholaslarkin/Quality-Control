@@ -18,8 +18,8 @@ public class SceneTransition : MonoBehaviour
     
 
     public Camera playerSceneCamera;
-    public int sceneIndex;
-    public int nextSceneIndex;
+    public int sceneIndex; //current scene index
+    public int lastSceneIndex; //last scene index
     private Scene MainMenu;
     private Scene playerJoinScene;
     private Scene kothScene;
@@ -49,6 +49,13 @@ public class SceneTransition : MonoBehaviour
         Debug.Log("Refreshed on start");
         refreshSceneCount();
     }
+    private void Update()
+    {
+        if (DeathTrigger.oneAlive == true)
+        {
+            goNextScene();
+        }
+    }
     private void refreshSceneCount()
     {
         minigameScenes.Clear();
@@ -57,24 +64,17 @@ public class SceneTransition : MonoBehaviour
         minigameScenes.Add(electricScene);
     }
 
-    //private void StartGame()
-    //{
-    //    SceneManager.LoadScene(playerJoinScene.buildIndex);
-    //}
-    private void randomizeScene(List<Scene> minigamesAvail)
+    
+    private void randomizeScene()
     {
-        //clear and re add minigames to the list if only 1 choice availible
-        if (minigamesAvail.Count <= 1)
+        int newSceneIndex;
+        do
         {
-            Debug.Log("Refreshed in randomizeScene");
-            refreshSceneCount();
-        }
-        nextSceneIndex = Random.Range(1, minigameScenes.Count);
-        while (nextSceneIndex == sceneIndex)
-        {
-            nextSceneIndex = Random.Range(1, 4);
-            Debug.Log("Nextsceneindex: " + nextSceneIndex);
-        }
+            newSceneIndex = Random.Range(1, 4); // 3 total scenes chooses 1,2,3
+        } while (newSceneIndex == lastSceneIndex);
+
+        lastSceneIndex = newSceneIndex;
+        SceneManager.LoadSceneAsync(newSceneIndex,LoadSceneMode.Additive);
 
     }
 
@@ -88,84 +88,39 @@ public class SceneTransition : MonoBehaviour
                 SceneManager.LoadSceneAsync(4);
                 SceneManager.UnloadSceneAsync(0);
                 break;
+            case GameManager.GameStateEnums.PlayersJoin:
+                randomizeScene();
+                //SceneManager.LoadSceneAsync(sceneIndex,LoadSceneMode.Additive);
+                break;
             case GameManager.GameStateEnums.InGame:
-                SceneManager.UnloadSceneAsync(minigameScenes[sceneIndex]);
-                randomizeScene(minigameScenes);
-                SceneManager.LoadSceneAsync(sceneIndex, LoadSceneMode.Additive);
-                minigameScenes.RemoveAt(sceneIndex);
+                SceneManager.UnloadSceneAsync(minigameScenes[lastSceneIndex]);
+                randomizeScene();
+                //SceneManager.LoadSceneAsync(sceneIndex, LoadSceneMode.Additive);
                 break;
             case GameManager.GameStateEnums.GameOver:
+                SceneManager.LoadSceneAsync(5,LoadSceneMode.Additive);
+                SceneManager.UnloadSceneAsync(sceneIndex);
                 break;
-
-
         }
     }
-
     public System.Collections.IEnumerator StartCountdown()
     {
         
         while(playerscreenCountdown > 0){
             Debug.Log("Join time remaining: " + playerscreenCountdown);
             yield return new WaitForSeconds(1);
-            playerscreenCountdown --;
+            playerscreenCountdown--;
         }
 
         GameManager.Instance.GameState = GameManager.GameStateEnums.InGame;
         Destroy(playerSceneCamera.gameObject);
-        randomizeScene(minigameScenes);
-        sceneSelected = minigameScenes[sceneIndex].name;
-        //Debug.Log("MinigameScene Name: " + minigameScenes[sceneIndex].name);
-        //Debug.Log("sceneSelected name: " + sceneSelected.name);
-        Debug.Log("minigameScenes count" + minigameScenes.Count);
-        Debug.Log("NextSceneIndex: " + nextSceneIndex);
-        Debug.Log("SceneIndex: " + sceneIndex);
-        SceneManager.LoadSceneAsync(2, LoadSceneMode.Additive); //add a minigamescene from list
-        //minigameScenes.RemoveAt(sceneIndex); //remove that scene from the list
+        randomizeScene();
+        //Debug.Log("SceneIndex: " + sceneIndex);
+        //SceneManager.LoadSceneAsync(sceneIndex, LoadSceneMode.Additive); //add a minigamescene from list change to sceneIndex
 
     }
 
-    //bool IsSceneLoaded(string name)
-    //{
-    //    // Check if the scene is already loaded
-    //    for (int i = 0; i < SceneManager.sceneCount; i++)
-    //    {
-    //        Scene scene = SceneManager.GetSceneAt(i);
-    //        if (scene.name == name && scene.isLoaded)
-    //        {
-    //            return true;
-    //        }
-    //    }
-    //    return false;
-    //}
-
-    //void GoToScene()
-    //{
-    //    if (sceneIndex == 0)
-    //    {
-    //        SceneManager.LoadScene(0);
-    //    }
-    //    if (sceneIndex == 1)
-    //    {
-    //        SceneManager.LoadScene(1);
-    //    }
-    //    if (sceneIndex == 2)
-    //    {
-    //        SceneManager.LoadScene(2);
-    //    }
-    //    if (sceneIndex == 3)
-    //    {
-    //        SceneManager.LoadScene(3);
-    //    }
-    //    if (sceneIndex == 4)
-    //    {
-    //        SceneManager.LoadScene(4);
-    //    }
-    //    if (sceneIndex == 5)
-    //    {
-    //        SceneManager.LoadScene(5);
-    //    }
-    //}
-
+  
 
 
 
