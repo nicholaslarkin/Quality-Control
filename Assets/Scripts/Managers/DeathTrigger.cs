@@ -17,20 +17,15 @@ public class DeathTrigger : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            //playerDeathOrder.Add(PlayerManager.playerList.FindIndex(go => go == other.gameObject));
-            Debug.Log("DeathOrderList: " + DeathTrigger.playerDeathOrder);
             other.gameObject.GetComponent<Player>().playerAlive = false;
             other.gameObject.GetComponent<Transform>().position = deathPos;
+            PlayerManager.playerStatus[other.gameObject.GetComponent<Player>().playerNumber] = false;
         }
 
     }
 
     public void Update()
     {
-        foreach (GameObject player in PlayerManager.playerList)
-        {
-
-        }
 
         //if there is only 1 player alive and there are more than 1 players in the game, go next scene
         if (PlayerManager.playerStatus.Count(b => b) == 1 && PlayerManager.playerList.Count > 1)
@@ -60,6 +55,7 @@ public class DeathTrigger : MonoBehaviour
 
             player.GetComponent<Player>().playerAlive = true;
         }
+        oneAlive = false;
     }
     public void ScoreCheck()
     {
