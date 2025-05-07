@@ -24,8 +24,8 @@ public class KOTHTimer : MonoBehaviour
         else if (countingDown == false && timeRemaining <= 0)
         {
             timerRestart();
-            Debug.Log("Restarted in timer");
-            Debug.Log("timer after restart:" +  timeRemaining);
+            //Debug.Log("Restarted in timer");
+            //Debug.Log("timer after restart:" +  timeRemaining);
         }
         
     }
@@ -33,7 +33,7 @@ public class KOTHTimer : MonoBehaviour
     {
         GetComponent<Transform>().position = DeathTrigger.deathPos;
         DeathTrigger.playerDeathOrder.Add(PlayerManager.playerList.FindIndex(go => go == this.gameObject));
-        Debug.Log("DeathOrderList: " + DeathTrigger.playerDeathOrder);
+        //Debug.Log("DeathOrderList: " + DeathTrigger.playerDeathOrder);
 
         GetComponent<Player>().playerAlive = false;
         countingDown = false;
