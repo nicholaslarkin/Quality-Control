@@ -49,13 +49,6 @@ public class SceneTransition : MonoBehaviour
         Debug.Log("Refreshed on start");
         refreshSceneCount();
     }
-    private void Update()
-    {
-        if (DeathTrigger.oneAlive == true)
-        {
-            goNextScene();
-        }
-    }
     private void refreshSceneCount()
     {
         minigameScenes.Clear();
