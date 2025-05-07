@@ -9,6 +9,7 @@ public class DeathTrigger : MonoBehaviour
     public static Vector3 deathPos = new Vector3(94.7053986f, 19.0300007f, 17.2780991f);
     public static bool oneAlive = false;
     public int playerLiving = 5;
+
     [SerializeField] public SceneTransition sceneTransition;
     [SerializeField] public static List<int> playerDeathOrder = new List<int>(4);
 
