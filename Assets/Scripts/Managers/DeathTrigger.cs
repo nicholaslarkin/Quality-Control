@@ -18,12 +18,9 @@ public class DeathTrigger : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-<<<<<<< Updated upstream
-=======
             //playerDeathOrder.Add(PlayerManager.playerList.FindIndex(go => go == other.gameObject));
             SoundManager.Instance.PlaySFXWithSource(12, 1f); //death sfx
             Debug.Log("DeathOrderList: " + DeathTrigger.playerDeathOrder);
->>>>>>> Stashed changes
             other.gameObject.GetComponent<Player>().playerAlive = false;
             other.gameObject.GetComponent<Transform>().position = deathPos;
             PlayerManager.playerStatus[other.gameObject.GetComponent<Player>().playerNumber] = false;
