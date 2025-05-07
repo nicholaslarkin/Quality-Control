@@ -25,7 +25,7 @@ public class SceneTransition : MonoBehaviour
     private Scene kothScene;
     private Scene boxScene;
     private Scene electricScene;
-    [SerializeField] private int playerscreenCountdown = 2;
+    [SerializeField] private int playerscreenCountdown = 5;
     [SerializeField] private List<Scene> minigameScenes = new List<Scene>(3);
     [SerializeField] public string sceneSelected;
 

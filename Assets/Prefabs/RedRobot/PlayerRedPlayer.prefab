@@ -134,10 +134,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c472434865b3a3c4d931e9190ba78f80, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  winningScore: 6
   speed: 100
   horizontalInput: 0
   verticalInput: 0
-  turnSpeed: 10
   forceDirection: {x: 0.70710677, y: 0, z: 0.70710677}
   isGrounded: 0
   jumpValue: 10
@@ -151,6 +151,10 @@ MonoBehaviour:
   rb: {fileID: 34445256766633547}
   move: {x: 0, y: 0}
   inputManager: {fileID: 2556146342781967428}
+  playerNumber: 0
+  playerAlive: 1
+  gameScore: 0
+  canMove: 1
 --- !u!114 &2556146342781967428
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -341,7 +345,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0.07107735, b: 1, a: 1}
+  m_Color: {r: 1, g: 0.09760031, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1

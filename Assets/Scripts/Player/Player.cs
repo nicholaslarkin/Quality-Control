@@ -1,7 +1,9 @@
 using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Rendering;
 using UnityEngine.SceneManagement;
+using Random = UnityEngine.Random;
 
 public class Player : MonoBehaviour
 {
@@ -42,12 +44,12 @@ public class Player : MonoBehaviour
     [SerializeField] public int gameScore = 0;
     [SerializeField] public Boolean canMove = true;
 
-  
-    
+
+
 
     //set player number
 
-    
+
     private void setPlayer()
     {
         playerNumber = PlayerManager.playerList.IndexOf(this.gameObject);
@@ -146,6 +148,10 @@ public class Player : MonoBehaviour
                     Vector3 direction = (hit.transform.position - transform.position).normalized + knockupVector ;
                     Rigidbody rb = hit.GetComponent<Rigidbody>();
                     rb.AddForce(direction * knockbackValue, ForceMode.Impulse);
+                    SoundManager.Instance.PlaySFXWithSource(Random.Range(0, 2), 0.2f); //metal sound of pushing
+                    SoundManager.Instance.PlaySFXWithSource(Random.Range(2, 4), 1f); //random "do it again"
+                    SoundManager.Instance.PlaySFXWithSource(Random.Range(5, 7), 0.5f); //pushing
+                    SoundManager.Instance.PlaySFXWithSource(Random.Range(8, 12), 0.7f); //being pushed
                 }
             }
             cooldownRemaining = pushCooldown;
