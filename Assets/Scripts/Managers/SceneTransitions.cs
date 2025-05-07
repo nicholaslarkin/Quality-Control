@@ -49,6 +49,7 @@ public class SceneTransition : MonoBehaviour
         Debug.Log("Refreshed on start");
         refreshSceneCount();
     }
+
     private void refreshSceneCount()
     {
         minigameScenes.Clear();
@@ -88,7 +89,7 @@ public class SceneTransition : MonoBehaviour
             case GameManager.GameStateEnums.InGame:
                 SceneManager.UnloadSceneAsync(minigameScenes[lastSceneIndex]);
                 randomizeScene();
-                //SceneManager.LoadSceneAsync(sceneIndex, LoadSceneMode.Additive);
+                SceneManager.LoadSceneAsync(sceneIndex, LoadSceneMode.Additive);
                 break;
             case GameManager.GameStateEnums.GameOver:
                 SceneManager.LoadSceneAsync(5,LoadSceneMode.Additive);
