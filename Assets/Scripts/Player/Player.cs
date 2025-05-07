@@ -37,7 +37,7 @@ public class Player : MonoBehaviour
 
     [Header("Player Information")]
     [SerializeField] public int PlayerNumber => playerNumber;
-    [SerializeField] private int playerNumber;
+    [SerializeField] public int playerNumber;
     [SerializeField] public bool playerAlive = true;
     [SerializeField] public int gameScore = 0;
     [SerializeField] public Boolean canMove = true;

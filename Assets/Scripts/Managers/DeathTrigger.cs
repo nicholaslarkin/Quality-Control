@@ -9,6 +9,7 @@ public class DeathTrigger : MonoBehaviour
     public static Vector3 deathPos = new Vector3(94.7053986f, 19.0300007f, 17.2780991f);
     public static bool oneAlive = false;
     public int playerLiving = 5;
+
     [SerializeField] public SceneTransition sceneTransition;
     [SerializeField] public static List<int> playerDeathOrder = new List<int>(4);
 
@@ -17,20 +18,15 @@ public class DeathTrigger : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            //playerDeathOrder.Add(PlayerManager.playerList.FindIndex(go => go == other.gameObject));
-            Debug.Log("DeathOrderList: " + DeathTrigger.playerDeathOrder);
             other.gameObject.GetComponent<Player>().playerAlive = false;
             other.gameObject.GetComponent<Transform>().position = deathPos;
+            PlayerManager.playerStatus[other.gameObject.GetComponent<Player>().playerNumber] = false;
         }
 
     }
 
     public void Update()
     {
-        foreach (GameObject player in PlayerManager.playerList)
-        {
-
-        }
 
         //if there is only 1 player alive and there are more than 1 players in the game, go next scene
         if (PlayerManager.playerStatus.Count(b => b) == 1 && PlayerManager.playerList.Count > 1)
@@ -60,6 +56,7 @@ public class DeathTrigger : MonoBehaviour
 
             player.GetComponent<Player>().playerAlive = true;
         }
+        oneAlive = false;
     }
     public void ScoreCheck()
     {

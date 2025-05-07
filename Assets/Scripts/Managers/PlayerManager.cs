@@ -8,15 +8,29 @@ public class PlayerManager : MonoBehaviour
     public static PlayerManager Instance => instance;
     private static PlayerManager instance;
     public PlayerInputManager playerInputManager;
-
+    public static List<bool> playerStatus = new List<bool>();
     public static List<GameObject> playerList = new List<GameObject>();
-    public static List<bool> playerStatus = new List<bool>();  
-    [SerializeField] private List <GameObject> playerPrefabsKoth = new List<GameObject>();
+    private bool firstTime = false;
+    [SerializeField] private List <GameObject> playerPrefabsKoth = new List<GameObject>(); 
     [SerializeField] private GameObject playerPrefab;
 
     private void Awake()
     {
         instance = this;
+    }
+    
+    //call this after all players join and sets up the list with the amount of players after they all joined
+    public void playerStatusSetup(List<bool> status)
+    {
+        if (firstTime == false) {
+            foreach(GameObject player in playerList)
+            {
+                status.Add(true);
+            }
+            Debug.Log("Total player count:" + playerStatus.Count);
+        }
+        firstTime = true;
+
     }
 
     private void Start()
@@ -55,6 +69,7 @@ public class PlayerManager : MonoBehaviour
                 }
                 break;
             case (GameManager.GameStateEnums.InGame):
+                playerStatusSetup(playerStatus);
                 playerInputManager.DisableJoining();
                 break;
             case (GameManager.GameStateEnums.MainMenu):
