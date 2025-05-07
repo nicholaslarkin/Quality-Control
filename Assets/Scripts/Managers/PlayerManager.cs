@@ -23,13 +23,24 @@ public class PlayerManager : MonoBehaviour
     public void playerStatusSetup(List<bool> status)
     {
         if (firstTime == false) {
-            foreach(GameObject player in playerList)
+            //foreach(GameObject player in playerList)
+            //{
+            //    status.Add(true);
+            //    Debug.Log("Added player once");
+            //}
+
+            for (int i = 0; i < playerList.Count; i++)
             {
-                status.Add(true);
+                playerStatus[i] = true;
+                
             }
-            Debug.Log("Total player count:" + playerStatus.Count);
+            Debug.Log("Total playerstatus count: " + playerStatus.Count);
+            Debug.Log("Player1 Status" + playerStatus[0]);
+
+            Debug.Log("Total playerlist count: "+ playerList.Count);
+            Debug.Log("Playermanager count:"+ playerInputManager.playerCount );
         }
-        firstTime = true;
+        
 
     }
 
@@ -70,6 +81,7 @@ public class PlayerManager : MonoBehaviour
                 break;
             case (GameManager.GameStateEnums.InGame):
                 playerStatusSetup(playerStatus);
+                firstTime = true;
                 playerInputManager.DisableJoining();
                 break;
             case (GameManager.GameStateEnums.MainMenu):

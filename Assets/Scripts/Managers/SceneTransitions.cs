@@ -69,6 +69,7 @@ public class SceneTransition : MonoBehaviour
 
         lastSceneIndex = newSceneIndex;
         SceneManager.LoadSceneAsync(newSceneIndex,LoadSceneMode.Additive);
+        Debug.Log("Scene Loaded");
 
     }
 
@@ -84,12 +85,14 @@ public class SceneTransition : MonoBehaviour
                 break;
             case GameManager.GameStateEnums.PlayersJoin:
                 randomizeScene();
+                Debug.Log("SceneLoadedGoNext");
                 //SceneManager.LoadSceneAsync(sceneIndex,LoadSceneMode.Additive);
                 break;
             case GameManager.GameStateEnums.InGame:
                 SceneManager.UnloadSceneAsync(minigameScenes[lastSceneIndex]);
                 randomizeScene();
                 SceneManager.LoadSceneAsync(sceneIndex, LoadSceneMode.Additive);
+                Debug.Log("next minigame");
                 break;
             case GameManager.GameStateEnums.GameOver:
                 SceneManager.LoadSceneAsync(5,LoadSceneMode.Additive);
